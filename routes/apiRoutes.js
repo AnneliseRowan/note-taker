@@ -1,4 +1,5 @@
 const db = require("../db/db.json"); 
+const fs = require("fs");
 
 module.exports = (app) => {
 
@@ -7,20 +8,21 @@ module.exports = (app) => {
 
 
     app.post("/api/notes", (req, res) => {
-        let newNote = req.body; 
-        db.push(newNote); 
-        updateDb(); 
-        return(`Added new note: ${newNote.title}`);
+        updateDb(req.body); 
+        return(`Added new note: ${req.body.title}`);
     });
 
     app.delete("/api/notes/:id", (req, res) => {
-        notes.splice(req.params.id, 1); 
+        db.splice(req.params.id, 1); 
         updateDb(); 
         console.log(`Deleted noted with id: ${req.params.id}`);
     });
 
-    const updateDb = () => {
-        fs.writeFile(db, JSON.stringify(db, "\t"), err => {
+    const updateDb = (newNote) => {
+        // fs.readFile("db/db.json", "utf8", (data) => {
+            
+        // })
+        fs.writeFile("../db/db.json", JSON.stringify(newNote, "\t"), err => {
             if(err) {console.log("Ahhhhhh :", err)}; 
             console.log("Voila!"); 
         })

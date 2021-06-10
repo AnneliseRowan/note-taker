@@ -1,31 +1,14 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "## Your Task",
-  "main": "index.js",
-  "engines": {
-    "node": "14.x",
-    "npm": "7.x"
-  },
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AnneliseRowan/note-taker.git"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AnneliseRowan/note-taker/issues"
-  },
-  "homepage": "https://github.com/AnneliseRowan/note-taker#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "fs": "^0.0.1-security",
-    "heroku": "^7.54.1",
-    "nodemon": "^2.0.7",
-    "path": "^0.12.7"
+    "express": "^4.16.4"
   }
 }
