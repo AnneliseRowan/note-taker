@@ -28,6 +28,7 @@ module.exports = (app) => {
         });
     
         const updateDb = (newNote) => {
+
     
             fs.writeFile("./db/db.json", JSON.stringify(newNote), (err) => {
                 if (err) {console.log("Ahhhhhh :", err)}; 
@@ -37,4 +38,6 @@ module.exports = (app) => {
     
         }
     })
+
+
 }
