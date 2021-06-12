@@ -72,6 +72,7 @@ const handleNoteSave = () => {
     text: noteText.value,
   };
   saveNote(newNote).then(() => {
+    newNote.append(noteList)
     getAndRenderNotes();
     renderActiveNote();
   });
@@ -92,6 +93,7 @@ const handleNoteDelete = (e) => {
   deleteNote(noteId).then(() => {
     getAndRenderNotes();
     renderActiveNote();
+
   });
 };
 
