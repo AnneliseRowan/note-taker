@@ -1,28 +1,27 @@
 const db = require("../db/db.json"); 
 const fs = require("fs");
+const { v4: uuidv4 } = require('uuid'); 
+
 
 
 module.exports = (app) => {
 
     app.get("/api/notes", (req, res) => {
-        return res.json(); 
+        return res.json(db); 
     });
 
     app.post("/api/notes", (req, res) => {
-        fs.readFile("db/db.json", "utf8", (err, data) => {
         let currentNote = req.body; 
-        console.log("newNOtessss", currentNote)
+        console.log("current NOtessss", currentNote);
 
-        let notes = JSON.parse(data); 
-        let notesArr = []; 
-        console.log("notesssss", notes);
-        notesArr.push(currentNote); 
-        console.log("notesArr", notesArr); 
-        notesArr.push(notes); 
-        console.log("notesArr", notesArr); 
+        currentNote.id = uuidv4(); 
+        console.log("current note", currentNote); 
 
-        updateDb(notesArr); 
-        })
+        console.log("db", db);
+        db.push(currentNote); 
+        console.log("after db", db); 
+
+        updateDb(db); 
     });
 
     app.delete("/api/notes/:id", (req, res) => {
@@ -32,8 +31,8 @@ module.exports = (app) => {
     });
 }
 
-const updateDb = (currentNote) => {
-    fs.writeFile("./db/db.json", JSON.stringify(currentNote), (err) => {
+const updateDb = (notes) => {
+    fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
         if (err) {console.log("Ahhhhhh :", err)}; 
         console.log("Voila!"); 
         return true; 
