@@ -12,6 +12,6 @@ require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app); 
 
 
-app.listen(port, () => {
+app.listen(process.env.port || 3030, () => {
     console.log(`App listening on port: ${port}`); 
 }); 
