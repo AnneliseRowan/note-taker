@@ -29,14 +29,18 @@ module.exports = (app) => {
 
     app.delete("/api/notes/:id", (req, res) => {
         let deleteId = req.params.id;
+
+        // db.forEach((el) => {
+        //     el === deleteId ? db.splice(i, 1) : db; 
+        // })
         for(let i = 0; i < db.length; i++) {
             if(db[i].id === deleteId) {
                 db.splice(i, 1)
             }
         }
         ; 
-        writeFileAsync('./db/db.json', JSON.stringify(db), (err) => err ? console.error(err) : console.log(`Deleted noted with id: ${deleteId}`)).then(() => { res.json(db) })
-
+        //writeFileAsync('./db/db.json', JSON.stringify(db), (err) => err ? console.error(err) : console.log(`Deleted noted with id: ${deleteId}`)).then(() => { res.json(db) })
+        res.json(db); 
     });
 }
 
