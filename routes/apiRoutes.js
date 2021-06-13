@@ -1,7 +1,9 @@
 const db = require("../db/db.json"); 
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid'); 
+const util = require("util"); 
 
+const writeFileAsync = util.promisify(fs.writeFile);
 
 
 module.exports = (app) => {
@@ -25,9 +27,15 @@ module.exports = (app) => {
     });
 
     app.delete("/api/notes/:id", (req, res) => {
-        notes.splice(req.params.id, 1); 
-        updateDb(); 
-        console.log(`Deleted noted with id: ${req.params.id}`); 
+        let deleteId = req.params.id;
+        for(let i = 0; i < db.length; i++) {
+            if(db[i].id === deleteId) {
+                db.splice(i, 1)
+            }
+        }
+        ; 
+        writeFileAsync('./db/db.json', JSON.stringify(db), (err) => err ? console.error(err) : console.log(`Deleted noted with id: ${deleteId}`)).then(() => { res.json(db) })
+
     });
 }
 
