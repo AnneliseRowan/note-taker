@@ -24,6 +24,7 @@ module.exports = (app) => {
         console.log("after db", db); 
 
         updateDb(db); 
+        res.json(db); 
     });
 
     app.delete("/api/notes/:id", (req, res) => {
