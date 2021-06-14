@@ -91,17 +91,12 @@ const handleNoteDelete = (e) => {
   }
 
   deleteNote(noteId).then(() => {
-    timer(); 
   
     getAndRenderNotes();
     renderActiveNote();
 
   });
 };
-
-const timer = () => {
-  setTimeout(console.log("waiting"), 5000); 
-}
 
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {

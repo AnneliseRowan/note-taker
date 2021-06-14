@@ -1,7 +1,7 @@
 const db = require("../db/db.json"); 
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid'); 
-const util = require("util"); 
+const util = require('util');
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
@@ -14,15 +14,8 @@ module.exports = (app) => {
 
     app.post("/api/notes", (req, res) => {
         let currentNote = req.body; 
-        console.log("current NOtessss", currentNote);
-
         currentNote.id = uuidv4(); 
-        console.log("current note", currentNote); 
-
-        console.log("db", db);
         db.push(currentNote); 
-        console.log("after db", db); 
-
         updateDb(db); 
         res.json(db); 
     });
@@ -30,17 +23,12 @@ module.exports = (app) => {
     app.delete("/api/notes/:id", (req, res) => {
         let deleteId = req.params.id;
 
-        // db.forEach((el) => {
-        //     el === deleteId ? db.splice(i, 1) : db; 
-        // })
         for(let i = 0; i < db.length; i++) {
             if(db[i].id === deleteId) {
                 db.splice(i, 1)
             }
-        }
-        ; 
-        //writeFileAsync('./db/db.json', JSON.stringify(db), (err) => err ? console.error(err) : console.log(`Deleted noted with id: ${deleteId}`)).then(() => { res.json(db) })
-        res.json(db); 
+        }; 
+        writeFileAsync('./db/db.json', JSON.stringify(db), (err) => err ? console.error(err) : console.log('note deleted! New notes: ', db)).then(() => { res.json(db)}) 
     });
 }
 
