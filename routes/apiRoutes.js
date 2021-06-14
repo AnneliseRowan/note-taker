@@ -28,6 +28,7 @@ module.exports = (app) => {
                 db.splice(i, 1)
             }
         }; 
+        
         writeFileAsync('./db/db.json', JSON.stringify(db), (err) => err ? console.error(err) : console.log('note deleted! New notes: ', db)).then(() => { res.json(db)}) 
     });
 }
